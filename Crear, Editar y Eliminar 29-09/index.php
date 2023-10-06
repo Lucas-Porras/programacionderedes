@@ -1,8 +1,11 @@
 <?php
 
-$conexion = mysqli_connect("localhost", "root", "", "usuarios");
+
+$conexion = mysqli_connect("localhost", "root", "", "labdhalaa");
+
 
 if(isset($_POST['register'])){ // Decimos que si existe el boton de Registrarse, que defina las variables de los POST
+
 
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
@@ -16,20 +19,24 @@ if(isset($_POST['register'])){ // Decimos que si existe el boton de Registrarse,
     $notas = $_POST['notas'];
     $nick = $_POST['nick'];
 
+
     // Decimos que si la longitud de la string de nombre es mayor a cero, que haga la consulta sql y la ejecute con el query
     if(strlen($nombre) > 0 && strlen($apellido) > 0 && strlen($email) > 0 && strlen($pwd) > 0 &&strlen($numcel) > 0  && strlen($compañia) > 0 && strlen($direccion) > 0 && strlen($web) > 0 && strlen($bdate) && strlen($notas) > 0 && strlen($nick)>0){
         // Esto es todo para el userdetails
         $sqludetails = "INSERT INTO userdetails (name, surname, email, pwd, phonename, company, address, web, bdate, label_varchar, nick) VALUES('$nombre', '$apellido', '$email', '$pwd', '$numcel', '$compañia', '$direccion', '$web', '$bdate', '$notas', '$nick')";
         $resultadoudetails = mysqli_query($conexion, $sqludetails);
 
+
         // Ahora hacemos lo mismo pero para la tabla users brindandole la información para el created_At
         $sqluser = "INSERT INTO user (nick, mail, pwd, created_At) VALUES ('$nick', '$email', '$pwd', NOW())";
         $resultadouser = mysqli_query($conexion, $sqluser);
-        
+       
     }
     else{
         echo '<script language="javascript">alert("Hay que rellenar todos los campos");</script>';
     }
+
+
 
 
 }
@@ -97,29 +104,32 @@ if(isset($_POST['register'])){ // Decimos que si existe el boton de Registrarse,
         </div>
     </div>
 
+
     <?php
 
+
         if(isset($_POST['eliminar'])){
-            $nick = $_POST['nick'];
-            if(strlen($nick) > 0){
-                $sqldel = "DELETE FROM userdetails WHERE nick = '$nick'";
+            $id = $_POST['id'];
+            if(strlen($id) > 0){
+                $sqldel = "DELETE FROM userdetails WHERE id = '$id'";
                 $resultadodel = mysqli_query($conexion, $sqldel);
 
-                $sqlupdel = "UPDATE user SET Deleted_At = NOW() WHERE nick = '$nick'";
+
+                $sqlupdel = "UPDATE user SET Deleted_At = NOW() WHERE id = '$id'";
                 $resultadoupdel = mysqli_query($conexion, $sqlupdel);
             }
             else{
                 echo '<script language="javascript">alert("No ingresaste el nick de referencia");</script>';
             }
         }
-        
+       
     ?>
     <h1>Borrar</h1>
     <div class="borrar">
         <form action="" method="POST">
             <div>
-                <label for="nombre">Nick de referencia:</label>
-                <input type="text" name="nick" id="nick">
+                <label for="nombre">Id de referencia:</label>
+                <input type="text" name="id" id="id">
             </div>
             <div>
                 <input type="submit" value="Eliminar" name="eliminar" id="eliminar">
@@ -127,22 +137,25 @@ if(isset($_POST['register'])){ // Decimos que si existe el boton de Registrarse,
         </form>
     </div>
 
-    <?php 
+
+    <?php
         if(isset($_POST['editar'])){
-            
-            $nickref = $_POST['nickref'];
-            if(strlen($nickref) > 0){
+           
+            $id = $_POST['id'];
+            if(strlen($id) > 0){
                 $nombre = $_POST['nombre'];
 
-    
+
+   
                 if(strlen($nombre > 0)){
-                    
+                   
                     // Esto lo hacemos para editar
-                    $sqlupdate= "UPDATE userdetails SET name='$nombre' WHERE nick='$nickref'";
+                    $sqlupdate= "UPDATE userdetails SET name='$nombre' WHERE id='$id'";
                     $resultadoupdate = mysqli_query($conexion, $sqlupdate);
 
+
                     // Esto lo hacemos para actualizar
-                    $sqlupupd = "UPDATE user SET Updated_At = NOW() WHERE nick = '$nickref'";
+                    $sqlupupd = "UPDATE user SET Updated_At = NOW() WHERE id = '$id'";
                     $resultadoupupd = mysqli_query($conexion, $sqlupupd);
                 }
                 else{
@@ -150,7 +163,7 @@ if(isset($_POST['register'])){ // Decimos que si existe el boton de Registrarse,
                 }
             }
             else{
-                echo '<script language="javascript">alert("No ingresaste el nick de referencia");</script>';
+                echo '<script language="javascript">alert("No ingresaste el id de referencia");</script>';
             }
         }
     ?>
@@ -158,8 +171,8 @@ if(isset($_POST['register'])){ // Decimos que si existe el boton de Registrarse,
     <div class="actualizar">
         <form action="" method="POST">
             <div>
-                <label for="nickref">Nick de referencia:</label>
-                <input type="text" name="nickref" id="nickref" required>
+                <label for="idref">Id de referencia:</label>
+                <input type="text" name="id" id="id">
             </div>
             <div>
                 <label for="nombre">Nombre:</label>
@@ -170,44 +183,5 @@ if(isset($_POST['register'])){ // Decimos que si existe el boton de Registrarse,
             </div>
         </form>
     </div>
-    <br> 
-    <table border="2">
-    <tr>
-        <td>Nombre</td>
-        <td>Apellido</td>
-        <td>Email</td>
-        <td>Contraseña</td>
-        <td>Numero de telefono</td>
-        <td>Compañia</td>
-        <td>Direccion</td>
-        <td>Web</td>
-        <td>Cumpleaños</td>
-        <td>Notas</td>
-        <td>Nickname</td>
-    </tr>
-    <?php 
-    
-    $sqltabla = "SELECT * FROM userdetails";
-    $restuladotabla = mysqli_query($conexion, $sqltabla);
-    
-    while($mostrar = mysqli_fetch_array($restuladotabla)){ // El bucle  cada vez que se ejecuta, $mostrar se le asignara una fila de resultados
-        // El mysqli_fetch_array devuelve una fila de resultados como un array asociativo, $mostrar almacena los datos de cada fila de resultadotabla
-    ?>
-    <tr>
-        <td><?php echo $mostrar['name'] ?></td>
-        <td><?php echo $mostrar['surname'] ?></td>
-        <td><?php echo $mostrar['email'] ?></td>
-        <td><?php echo $mostrar['pwd'] ?></td>
-        <td><?php echo $mostrar['phonename'] ?></td>
-        <td><?php echo $mostrar['company'] ?></td>
-        <td><?php echo $mostrar['address'] ?></td>
-        <td><?php echo $mostrar['web'] ?></td>
-        <td><?php echo $mostrar['bdate'] ?></td>
-        <td><?php echo $mostrar['label_varchar'] ?></td>
-        <td><?php echo $mostrar['nick'] ?></td>
-    </tr>
-    <?php 
-    } ?>
-</table>
 </body>
 </html>

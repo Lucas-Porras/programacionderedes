@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-09-2023 a las 00:07:04
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 07-10-2023 a las 00:30:55
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `usuarios`
+-- Base de datos: `labdhalaa`
 --
 
 -- --------------------------------------------------------
@@ -42,9 +42,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nick`, `mail`, `pwd`, `Created_At`, `Updated_At`, `Deleted_At`) VALUES
-(1, 'Luquitas', 'abdhalalucas@gmail.com', '1234', '2023-09-29 14:53:01', NULL, '2023-09-29 15:26:09'),
-(2, 'Lolinho', 'lolito@mail.com', '1234', '2023-09-29 15:54:37', '2023-09-29 16:14:29', '2023-09-29 16:15:14'),
-(3, 'Intoxicados', 'vbsfdbsdf', '213', '2023-09-29 16:56:01', NULL, NULL);
+(1, 'Luquitas', 'purosgratis@gmaill.com', '1234', '2023-10-06 22:16:42', NULL, '2023-10-06 22:22:09'),
+(2, 'Reellenoh', 'Relleno@mail.com', '12344', '2023-10-06 22:25:28', '2023-10-06 22:27:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -72,7 +71,7 @@ CREATE TABLE `userdetails` (
 --
 
 INSERT INTO `userdetails` (`id`, `name`, `surname`, `email`, `pwd`, `phonename`, `company`, `address`, `web`, `bdate`, `label_varchar`, `nick`) VALUES
-(3, 'asdfa', 'vdfvdfs', 'vbsfdbsdf', '213', 124324, 'asdac', 'xzdas', 'aaaa', '1000-04-02', 'xxxxxxxx', 'Intoxicados');
+(2, 'fff', 'Relleno2', 'Relleno@mail.com', '12344', 2147483647, 'Lolos omg', 'Relleno 654', 'www.relleno.com', '1999-02-05', 'Lorem Ipusm', 'Reellenoh');
 
 --
 -- Índices para tablas volcadas
@@ -98,13 +97,13 @@ ALTER TABLE `userdetails`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `userdetails`
 --
 ALTER TABLE `userdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
